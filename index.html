@@ -56,11 +56,12 @@ Copy code
 		background-color: #ff0000;
 		color: #ffffff;
 	}
+
 </style>
 </head>
 <body>
 <center>
-<h1>Musica 24/7</h1>
+<h1>Musica 24/7	</h1>
 </center>
 <audio id="audioPlayer" controls>
 	<source src="cancion1.mp3" type="audio/mp3">
@@ -174,6 +175,11 @@ Copy code
 			return false;
 		}
 	}
+	  document.addEventListener("click", function(e) {
+    if (!e.target.matches("#boton-arriba")) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  });
 </script>
 </body>
 </html>
