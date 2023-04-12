@@ -2,7 +2,8 @@
 <html>
 <head>
 	<title>Musica 24/7</title>
-	<link rel="shortcut icon" href="https://w7.pngwing.com/pngs/687/382/png-transparent-music-application-icon-purple-symbol-circle-purple-music-download-apple-music.png">
+	
+		-<link rel="shortcut icon" href="https://w7.pngwing.com/pngs/687/382/png-transparent-music-application-icon-purple-symbol-circle-purple-music-download-apple-music.png">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<style>
@@ -15,6 +16,45 @@
 			background-repeat: no-repeat;
 			color: #00e64953;
 		}
+
+		nav {
+  background-color: #33333300;
+}
+
+ul {
+  list-style-type: none;
+  margin: 10;
+  padding: 10px;
+  overflow: hidden;
+}
+
+li {
+  float: left;
+  margin-right: 50px; /* Añadir un margen horizontal */
+}
+
+li:last-child {
+  margin-right: 0; /* Quitar el margen horizontal al último li */
+}
+
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #111;
+}
+
+img {
+  height: 24px;
+  width: 24px;
+}
+
 css
 Copy code
 	h1 {
@@ -57,9 +97,66 @@ Copy code
 		color: #ffffff;
 	}
 
+	#comments {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 35px;
+  border: 2px solid #ccc;
+}
+
+#comment-form label,
+#comment-form input,
+#comment-form textarea {
+  display: block;
+  margin-bottom: 10px;
+}
+
+#comment-form input,
+#comment-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+#comment-form button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#comment-list {
+  margin-top: 20px;
+  padding: 0;
+  list-style: none;
+}
+
+#comment-list li {
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+#comment-list span {
+  font-weight: bold;
+}
+
+
 </style>
 </head>
 <body>
+<center>
+	<nav>
+		<ul>
+		  <li><a href="https://innovatech-web.github.io/musicas/"><img src="https://w7.pngwing.com/pngs/22/217/png-transparent-computer-icons-music-musik-rectangle-beat-symbol-thumbnail.png" alt="Icono" /></a></li>
+		  <li><a href="https://innovatech-web.github.io/musicas/">Inicio</a></li>
+		  <li><a href="https://www.instagram.com/_bitflix__/">Contacto</a></li>
+		</ul>
+	  </nav>
+	</center>
+
 <center>
 <h1>Musica 24/7	</h1>
 </center>
@@ -154,10 +251,33 @@ Copy code
 	<br>
 	<li><a href="Zaramay ft Natos y Waor - Freestyle Session  (Prod. Nahuel The Coach).mp3">Zaramay ft Natos y Waor - Freestyle Session  (Prod. Nahuel The Coach)</a></li>
 	
-	
-
-	
 </ul>
+
+<br>
+
+<center>
+
+<h2 style="color: red";>
+	!! Si la app te gusto no dudes en dejar un comentario positivo :) y tambien si te gustaria que incrementemos mas canciones no dudes en poner la cancion que te gusta !!
+</h2>
+</center>
+<br>
+
+<br>
+
+<div id="comments">
+	<h2>Comentarios</h2>
+	<form id="comment-form">
+	  <label for="name">Nombre:</label>
+	  <input type="text" id="name" required>
+	  <label for="comment">Comentario:</label>
+	  <textarea id="comment" required></textarea>
+	  <button type="submit">Enviar</button>
+	</form>
+	<ul id="comment-list"></ul>
+  </div>
+  
+  
 
 <script>
 	var audioPlayer = document.getElementById('audioPlayer');
@@ -174,12 +294,71 @@ Copy code
 			audioPlayer.src = currentTrack;
 			return false;
 		}
-	}
-	  document.addEventListener("click", function(e) {
-    if (!e.target.matches("#boton-arriba")) {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
+	};
+
+	const commentForm = document.querySelector('#comment-form');
+const commentList = document.querySelector('#comment-list');
+
+// Cargar los comentarios previos almacenados en LocalStorage
+const storedComments = JSON.parse(localStorage.getItem('comments')) || [];
+
+// Agregar los comentarios previos al inicio de la lista de comentarios
+storedComments.forEach(comment => {
+  const commentItem = document.createElement('li');
+  const commentName = document.createElement('span');
+  const commentText = document.createElement('span');
+
+  commentName.textContent = comment.name;
+  commentText.textContent = comment.comment;
+
+  commentItem.appendChild(commentName);
+  commentItem.appendChild(commentText);
+
+  commentList.insertBefore(commentItem, commentList.firstChild);
+});
+
+commentForm.addEventListener('submit', e => {
+  e.preventDefault();
+
+  const nameInput = document.querySelector('#name');
+  const commentInput = document.querySelector('#comment');
+
+  const name = nameInput.value;
+  const comment = commentInput.value;
+
+  const commentItem = document.createElement('li');
+  const commentName = document.createElement('span');
+  const commentText = document.createElement('span');
+
+  commentName.textContent = name;
+  commentText.textContent = comment;
+
+  commentItem.appendChild(commentName);
+  commentItem.appendChild(commentText);
+
+  commentList.insertBefore(commentItem, commentList.firstChild);
+
+  // Guardar los comentarios en LocalStorage
+  const storedComments = JSON.parse(localStorage.getItem('comments')) || [];
+  storedComments.unshift({ name, comment });
+  localStorage.setItem('comments', JSON.stringify(storedComments));
+
+  nameInput.value = '';
+  commentInput.value = '';
+});
+
+   // Selecciona el botón de descarga
+   const botonDescarga2 = document.getElementById('boton-descarga-2');
+  
+  // Agrega un contador
+  let contador2 = 0;
+  
+  // Agrega un event listener al botón de descarga
+  botonDescarga2.addEventListener('click', () => {
+    contador2++;
+    botonDescarga2.innerHTML = `Descargar segundo archivo (${contador2})`;
   });
+
 </script>
 </body>
 </html>
