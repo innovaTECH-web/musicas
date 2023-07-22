@@ -9,13 +9,12 @@
 	<style>
 		body {
 			font-family: Arial, sans-serif;
-			background-color: black;
-			max-width: 100%;
-			max-height: 100%;
-			background-size: cover;
-			background-repeat: no-repeat;
-			color: #00e64953;
-		}
+			margin: 0;
+            padding: 0;
+            transition: background-color 1s ease; /* Agregar una transición suave al cambio de color */
+        }
+        
+		
 
 		nav {
   background-color: #33333300;
@@ -250,6 +249,8 @@ Copy code
 	<li><a href="ZARAMAY - Ta cabrón el Himalaya II Prod By NahuelTheCoach (Oneshot By Luguez).mp3">ZARAMAY - Ta cabrón el Himalaya II Prod By NahuelTheCoach (Oneshot By Luguez)</a></li>
 	<br>
 	<li><a href="Zaramay ft Natos y Waor - Freestyle Session  (Prod. Nahuel The Coach).mp3">Zaramay ft Natos y Waor - Freestyle Session  (Prod. Nahuel The Coach)</a></li>
+	<br>
+	<li><a href="Venga Pa’ Acá 😈 - Pailita (Video Oficial).mp3">Venga Pa’ Acá 😈 - Pailita</a></li>
 	
 </ul>
 
@@ -280,6 +281,20 @@ Copy code
   
 
 <script>
+
+	        // Colores que se utilizarán en el cambio automático
+			const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00'];
+        let currentIndex = 0;
+
+        function changeBackgroundColor() {
+            document.body.style.backgroundColor = colors[currentIndex];
+            currentIndex = (currentIndex + 1) % colors.length; // Avanza al siguiente color
+        }
+
+        // Cambiar el color de fondo cada 3 segundos (3000 milisegundos)
+        setInterval(changeBackgroundColor, 3000);
+
+
 	var audioPlayer = document.getElementById('audioPlayer');
 	var playlist = document.getElementById('playlist');
 	var links = playlist.getElementsByTagName('a');
